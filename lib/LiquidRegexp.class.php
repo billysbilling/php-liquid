@@ -116,6 +116,6 @@ class LiquidRegexp
      */
     function split($string, $limit = -1)
     {
-        return preg_split($this->pattern, $string, $limit);
+        return preg_split($this->pattern, $string, (int) $limit);
     }
 }
