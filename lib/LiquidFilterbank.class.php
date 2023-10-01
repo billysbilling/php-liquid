@@ -3,8 +3,8 @@
 /**
  * The filter bank is where all registered filters are stored, and where filter invocation is handled
  * it supports a variety of different filter types; objects, class, and simple methods
- *
  */
+#[\AllowDynamicProperties]
 class LiquidFilterbank
 {
     /**
