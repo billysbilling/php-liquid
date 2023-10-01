@@ -34,7 +34,7 @@ if (! defined('DEFAULT_MAX_NESTED_FRAMES')) {
  *    @subpackage WebTester
  */
 class SimpleBrowserHistory {
-    private $sequence = array();
+    private $sequence = [];
     private $position = -1;
 
     /**

@@ -11,11 +11,11 @@ class LiquidCacheApc extends LiquidCache
 {
     /**
      * Initializes this component.
-     * 
+     *
      * It checks the availability of apccache.
      * @throws LiquidException if APC cache extension is not loaded or is disabled.
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
 

@@ -11,11 +11,11 @@ class LiquidCacheFile extends LiquidCache
 {
     /**
      * Initializes this component.
-     * 
+     *
      * It checks the availability of apccache.
      * @throws LiquidException if Cachedir not exists.
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
 
@@ -102,8 +102,8 @@ class LiquidCacheFile extends LiquidCache
 
     /**
      * Removes expired cache files.
-     * 
-     * 
+     *
+     *
      */
     protected function gc()
     {

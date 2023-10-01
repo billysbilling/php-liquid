@@ -1,9 +1,9 @@
 <?php
 /**
  * Base class for tags
- * 
+ *
  * @package Liquid
- * @copyright Copyright (c) 2011-2012 Harald Hanek, 
+ * @copyright Copyright (c) 2011-2012 Harald Hanek,
  * fork of php-liquid (c) 2006 Mateo Murphy,
  * based on Liquid for Ruby (c) 2006 Tobias Luetke
  * @license http://harrydeluxe.mit-license.org
@@ -66,7 +66,7 @@ abstract class LiquidTag
      */
     public function extractAttributes($markup)
     {
-        $this->_attributes = array();
+        $this->_attributes = [];
 
         $attribute_regexp = new LiquidRegexp(LIQUID_TAG_ATTRIBUTES);
 

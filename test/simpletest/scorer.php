@@ -166,7 +166,7 @@ class SimpleScorer {
     function paintException($exception) {
         $this->exceptions++;
     }
-    
+
     /**
      *    Prints the message for skipping tests.
      *    @param string $message    Text of skip condition.
@@ -249,11 +249,11 @@ class SimpleReporter extends SimpleScorer {
      */
     function __construct() {
         parent::__construct();
-        $this->test_stack = array();
+        $this->test_stack = [];
         $this->size = null;
         $this->progress = 0;
     }
-    
+
     /**
      *    Gets the formatter for small generic data items.
      *    @return SimpleDumper          Formatter.
@@ -456,7 +456,7 @@ class SimpleReporterDecorator {
         if (method_exists($this->reporter, 'getTestList')) {
             return $this->reporter->getTestList();
         } else {
-            return array();
+            return [];
         }
     }
 
@@ -481,7 +481,7 @@ class SimpleReporterDecorator {
     function createInvoker($invoker) {
         return $this->reporter->createInvoker($invoker);
     }
-    
+
     /**
      *    Gets the formatter for privateiables and other small
      *    generic data items.
@@ -583,7 +583,7 @@ class SimpleReporterDecorator {
     function paintException($exception) {
         $this->reporter->paintException($exception);
     }
-    
+
     /**
      *    Prints the message for skipping tests.
      *    @param string $message    Text of skip condition.
@@ -632,7 +632,7 @@ class SimpleReporterDecorator {
  *    @subpackage UnitTester
  */
 class MultipleReporter {
-    private $reporters = array();
+    private $reporters = [];
 
     /**
      *    Adds a reporter to the subscriber list.
@@ -701,7 +701,7 @@ class MultipleReporter {
         }
         return $invoker;
     }
-    
+
     /**
      *    Gets the formatter for privateiables and other small
      *    generic data items.
@@ -812,7 +812,7 @@ class MultipleReporter {
             $this->reporters[$i]->paintError($message);
         }
     }
-    
+
     /**
      *    Chains to the wrapped reporter.
      *    @param Exception $exception    Exception to display.

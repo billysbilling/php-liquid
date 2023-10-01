@@ -13,9 +13,9 @@
  */
 class SimpleTidyPageBuilder {
     private $page;
-    private $forms = array();
-    private $labels = array();
-    private $widgets_by_id = array();
+    private $forms = [];
+    private $labels = [];
+    private $widgets_by_id = [];
 
     public function __destruct() {
         $this->free();
@@ -27,8 +27,8 @@ class SimpleTidyPageBuilder {
      */
     private function free() {
         unset($this->page);
-        $this->forms = array();
-        $this->labels = array();
+        $this->forms = [];
+        $this->labels = [];
     }
 
     /**
@@ -252,7 +252,7 @@ class SimpleTidyPageBuilder {
             return;
         }
         if (! isset($this->widgets_by_id[$id])) {
-            $this->widgets_by_id[$id] = array();
+            $this->widgets_by_id[$id] = [];
         }
         $this->widgets_by_id[$id][] = $widget;
     }
@@ -263,7 +263,7 @@ class SimpleTidyPageBuilder {
      *  @return array            List of SimpleTag options.
      */
     private function collectSelectOptions($node) {
-        $options = array();
+        $options = [];
         if ($node->name == 'option') {
             $options[] = $this->tags()->createTag($node->name, $this->attributes($node))
                                       ->addContent($this->innerHtml($node));
@@ -284,9 +284,9 @@ class SimpleTidyPageBuilder {
      */
     private function attributes($node) {
         if (! preg_match('|<[^ ]+\s(.*?)/?>|s', $node->value, $first_tag_contents)) {
-            return array();
+            return [];
         }
-        $attributes = array();
+        $attributes = [];
         preg_match_all('/\S+\s*=\s*\'[^\']*\'|(\S+\s*=\s*"[^"]*")|([^ =]+\s*=\s*[^ "\']+?)|[^ "\']+/', $first_tag_contents[1], $matches);
         foreach($matches[0] as $unparsed) {
             $attributes = $this->mergeAttribute($attributes, $unparsed);
@@ -326,11 +326,11 @@ class SimpleTidyPageBuilder {
      *  @return array           List of SimpleTag frame descriptions.
      */
     private function collectFrames($node) {
-        $frames = array();
+        $frames = [];
         if ($node->name == 'frame') {
             $frames = array($this->tags()->createTag($node->name, (array)$node->attribute));
         } else if ($node->hasChildren()) {
-            $frames = array();
+            $frames = [];
             foreach ($node->child as $child) {
                 $frames = array_merge($frames, $this->collectFrames($child));
             }

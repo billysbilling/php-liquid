@@ -16,8 +16,8 @@ class TestOfAnythingExpectation extends UnitTestCase {
 class TestOfParametersExpectation extends UnitTestCase {
 
     function testEmptyMatch() {
-        $expectation = new ParametersExpectation(array());
-        $this->assertTrue($expectation->test(array()));
+        $expectation = new ParametersExpectation([]);
+        $this->assertTrue($expectation->test([]));
         $this->assertFalse($expectation->test(array(33)));
     }
 
@@ -29,24 +29,24 @@ class TestOfParametersExpectation extends UnitTestCase {
 
     function testAnyMatch() {
         $expectation = new ParametersExpectation(false);
-        $this->assertTrue($expectation->test(array()));
+        $this->assertTrue($expectation->test([]));
         $this->assertTrue($expectation->test(array(1, 2)));
     }
 
     function testMissingParameter() {
         $expectation = new ParametersExpectation(array(0));
-        $this->assertFalse($expectation->test(array()));
+        $this->assertFalse($expectation->test([]));
     }
 
     function testNullParameter() {
         $expectation = new ParametersExpectation(array(null));
         $this->assertTrue($expectation->test(array(null)));
-        $this->assertFalse($expectation->test(array()));
+        $this->assertFalse($expectation->test([]));
     }
 
     function testAnythingExpectations() {
         $expectation = new ParametersExpectation(array(new AnythingExpectation()));
-        $this->assertFalse($expectation->test(array()));
+        $this->assertFalse($expectation->test([]));
         $this->assertIdentical($expectation->test(array(null)), true);
         $this->assertIdentical($expectation->test(array(13)), true);
     }
@@ -78,8 +78,8 @@ class TestOfSimpleSignatureMap extends UnitTestCase {
 
     function testEmpty() {
         $map = new SimpleSignatureMap();
-        $this->assertFalse($map->isMatch("any", array()));
-        $this->assertNull($map->findFirstAction("any", array()));
+        $this->assertFalse($map->isMatch("any", []));
+        $this->assertNull($map->findFirstAction("any", []));
     }
 
     function testDifferentCallSignaturesCanHaveDifferentReferences() {
@@ -118,14 +118,14 @@ class TestOfSimpleSignatureMap extends UnitTestCase {
         $map->add(array(new AnythingExpectation()), new SimpleByValue("Any"));
         $map->add(array(2), new SimpleByValue("2"));
         $map->add("", new SimpleByValue("Default"));
-        $map->add(array(), new SimpleByValue("None"));
+        $map->add([], new SimpleByValue("None"));
         $this->assertEqual($map->findFirstAction(array(1, 2)), new SimpleByValue("1, 2"));
         $this->assertEqual($map->findFirstAction(array(1, 3)), new SimpleByValue("1, 3"));
         $this->assertEqual($map->findFirstAction(array(1, 4)), new SimpleByValue("1, 4"));
         $this->assertEqual($map->findFirstAction(array(1)), new SimpleByValue("1"));
         $this->assertEqual($map->findFirstAction(array(2)), new SimpleByValue("Any"));
         $this->assertEqual($map->findFirstAction(array(3)), new SimpleByValue("Any"));
-        $this->assertEqual($map->findFirstAction(array()), new SimpleByValue("Default"));
+        $this->assertEqual($map->findFirstAction([]), new SimpleByValue("Default"));
     }
 }
 
@@ -134,8 +134,8 @@ class TestOfCallSchedule extends UnitTestCase {
         $a = 5;
         $schedule = new SimpleCallSchedule();
         $schedule->register('aMethod', false, new SimpleByReference($a));
-        $this->assertReference($schedule->respond(0, 'aMethod', array()), $a);
-        $this->assertReference($schedule->respond(1, 'aMethod', array()), $a);
+        $this->assertReference($schedule->respond(0, 'aMethod', []), $a);
+        $this->assertReference($schedule->respond(1, 'aMethod', []), $a);
     }
 
     function testSpecificSignaturesOverrideTheAlwaysCase() {
@@ -154,8 +154,8 @@ class TestOfCallSchedule extends UnitTestCase {
         $schedule = new SimpleCallSchedule();
         $schedule->registerAt(0, 'aMethod', false, new SimpleByReference($one));
         $schedule->registerAt(1, 'aMethod', false, new SimpleByReference($two));
-        $this->assertReference($schedule->respond(0, 'aMethod', array()), $one);
-        $this->assertReference($schedule->respond(1, 'aMethod', array()), $two);
+        $this->assertReference($schedule->respond(0, 'aMethod', []), $one);
+        $this->assertReference($schedule->respond(1, 'aMethod', []), $two);
     }
 
     function testReturnsOverTimecanBeAlteredByTheArguments() {
@@ -166,8 +166,8 @@ class TestOfCallSchedule extends UnitTestCase {
         $schedule->registerAt(0, 'aMethod', false, new SimpleByReference($one));
         $schedule->registerAt(1, 'aMethod', array('a'), new SimpleByReference($two_a));
         $schedule->registerAt(1, 'aMethod', false, new SimpleByReference($two));
-        $this->assertReference($schedule->respond(0, 'aMethod', array()), $one);
-        $this->assertReference($schedule->respond(1, 'aMethod', array()), $two);
+        $this->assertReference($schedule->respond(0, 'aMethod', []), $one);
+        $this->assertReference($schedule->respond(1, 'aMethod', []), $two);
         $this->assertReference($schedule->respond(1, 'aMethod', array('a')), $two_a);
     }
 
@@ -175,7 +175,7 @@ class TestOfCallSchedule extends UnitTestCase {
         $a = 5;
         $schedule = new SimpleCallSchedule();
         $schedule->register('aMethod', false, new SimpleByValue($a));
-        $this->assertCopy($schedule->respond(0, 'aMethod', array()), $a);
+        $this->assertCopy($schedule->respond(0, 'aMethod', []), $a);
     }
 
     function testCanThrowException() {
@@ -183,7 +183,7 @@ class TestOfCallSchedule extends UnitTestCase {
             $schedule = new SimpleCallSchedule();
             $schedule->register('aMethod', false, new SimpleThrower(new Exception('Ouch')));
             $this->expectException(new Exception('Ouch'));
-            $schedule->respond(0, 'aMethod', array());
+            $schedule->respond(0, 'aMethod', []);
         }
     }
 
@@ -191,7 +191,7 @@ class TestOfCallSchedule extends UnitTestCase {
         $schedule = new SimpleCallSchedule();
         $schedule->register('aMethod', false, new SimpleErrorThrower('Ouch', E_USER_WARNING));
         $this->expectError('Ouch');
-        $schedule->respond(0, 'aMethod', array());
+        $schedule->respond(0, 'aMethod', []);
     }
 }
 
@@ -561,9 +561,9 @@ class TestOfMockExpectations extends UnitTestCase {
 
     function testZeroArguments() {
         $this->test->expectOnce('assert',
-                                array(new MemberExpectation('expected', array()), array(), '*'));
+                                array(new MemberExpectation('expected', []), [], '*'));
         $mock = new MockDummyWithInjectedTestCase();
-        $mock->expect('aMethod', array());
+        $mock->expect('aMethod', []);
         $mock->aMethod();
         $mock->mock->atTestEnd('testSomething', $this->test);
     }

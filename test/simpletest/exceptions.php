@@ -220,7 +220,7 @@ class SimpleExceptionTrap {
     function clear() {
         $this->expected = false;
         $this->message = false;
-        $this->ignored = array();
+        $this->ignored = [];
     }
 }
 ?>

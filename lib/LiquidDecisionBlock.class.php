@@ -1,11 +1,4 @@
 <?php
-/**
- * Base class for blocks that make logical decisions
- *
- * @package Liquid
- * @copyright Copyright (c) 2011-2012 Harald Hanek
- * @license http://harrydeluxe.mit-license.org
- */
 
 class LiquidDecisionBlock extends LiquidBlock
 {
@@ -27,32 +20,22 @@ class LiquidDecisionBlock extends LiquidBlock
 
     /**
      * Returns a string value of an array for comparisons
-     *
-     * @param mixed $value
-     * @return string
      */
-    private function _stringValue($value)
+    private function stringValue(mixed $value): string
     {
         // objects should have a to_string a value to compare to
-        if (is_object($value))
-        {
-            if (method_exists($value, 'to_string'))
-            {
+        if (is_object($value)) {
+            if (method_exists($value, 'to_string')) {
                 $value = $value->to_string();
             }
-            else
-            {
-                throw new LiquidException("Cannot convert $value to string");// harry
+
+            if (method_exists($value, '__toString')) {
+                return $value->__toString();
             }
 
-        }
+            throw new LiquidException("Cannot convert $value to string");// harry
 
-        // arrays simply return true
-        if (is_array($value))
-        {
-            return $value;
         }
-
         return $value;
     }
 
@@ -65,10 +48,10 @@ class LiquidDecisionBlock extends LiquidBlock
      * @param LiquidContext $context
      * @return bool
      */
-    protected function _equalVariables($left, $right, &$context)
+    protected function _equalVariables(string $left, string $right, &$context): bool
     {
-        $left = $this->_stringValue($context->get($left));
-        $right = $this->_stringValue($context->get($right));
+        $left = $this->stringValue($context->get($left));
+        $right = $this->stringValue($context->get($right));
 
         return ($left == $right);
 
@@ -76,7 +59,7 @@ class LiquidDecisionBlock extends LiquidBlock
 
 
     /**
-     * Interpret a comparison 
+     * Interpret a comparison
      *
      * @param string $left
      * @param string $right
@@ -86,46 +69,37 @@ class LiquidDecisionBlock extends LiquidBlock
      */
     protected function _interpretCondition($left, $right, $op = null, &$context)
     {
-        if (is_null($op))
-        {
-            $value = $this->_stringValue($context->get($left));
+        if (is_null($op)) {
+            $value = $this->stringValue($context->get($left));
             return $value;
         }
 
         // values of 'empty' have a special meaning in array comparisons
-        if ($right == 'empty' && is_array($context->get($left)))
-        {
+        if ($right == 'empty' && is_array($context->get($left))) {
             $left = count($context->get($left));
             $right = 0;
 
-        }
-        elseif ($left == 'empty' && is_array($context->get($right)))
-        {
+        } elseif ($left == 'empty' && is_array($context->get($right))) {
             $right = count($context->get($right));
             $left = 0;
 
-        }
-        else
-        {
+        } else {
             $left = $context->get($left);
             $right = $context->get($right);
 
-            $left = $this->_stringValue($left);
-            $right = $this->_stringValue($right);
+            $left = $this->stringValue($left);
+            $right = $this->stringValue($right);
         }
 
         // special rules for null values
-        if (is_null($left) || is_null($right))
-        {
+        if (is_null($left) || is_null($right)) {
             // null == null returns true
-            if ($op == '==' && is_null($left) && is_null($right))
-            {
+            if ($op == '==' && is_null($left) && is_null($right)) {
                 return true;
             }
 
             // null != anything other than null return true
-            if ($op == '!=' && (!is_null($left) || !is_null($right)))
-            {
+            if ($op == '!=' && (!is_null($left) || !is_null($right))) {
                 return true;
             }
 
@@ -134,8 +108,7 @@ class LiquidDecisionBlock extends LiquidBlock
         }
 
         // regular rules
-        switch ($op)
-        {
+        switch ($op) {
             case '==':
                 return ($left == $right);
 

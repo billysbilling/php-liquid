@@ -161,7 +161,7 @@ class SimpleTestCase {
      *    @access public
      */
     function getTests() {
-        $methods = array();
+        $methods = [];
         foreach (get_class_methods(get_class($this)) as $method) {
             if ($this->isTest($method)) {
                 $methods[] = $method;
@@ -192,7 +192,7 @@ class SimpleTestCase {
      */
     function before($method) {
         $this->reporter->paintMethodStart($method);
-        $this->observers = array();
+        $this->observers = [];
     }
 
     /**
@@ -428,7 +428,7 @@ class SimpleFileLoader {
      *    @access public
      */
     function selectRunnableTests($candidates) {
-        $classes = array();
+        $classes = [];
         foreach ($candidates as $class) {
             if (TestSuite::getBaseTestCase($class)) {
                 $reflection = new SimpleReflection($class);
@@ -485,7 +485,7 @@ class TestSuite {
      */
     function TestSuite($label = false) {
         $this->label = $label;
-        $this->test_cases = array();
+        $this->test_cases = [];
     }
 
     /**

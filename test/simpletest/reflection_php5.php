@@ -117,7 +117,7 @@ class SimpleReflection {
      *    @access public
      */
     function getInterfaceMethods() {
-        $methods = array();
+        $methods = [];
         foreach ($this->getInterfaces() as $interface) {
             $methods = array_merge($methods, get_class_methods($interface));
         }
@@ -194,8 +194,8 @@ class SimpleReflection {
      *    @access private
      */
     protected function onlyParents($interfaces) {
-        $parents = array();
-        $blacklist = array();
+        $parents = [];
+        $blacklist = [];
         foreach ($interfaces as $interface) {
             foreach($interfaces as $possible_parent) {
                 if ($interface->getName() == $possible_parent->getName()) {
@@ -294,7 +294,7 @@ class SimpleReflection {
         if ($name == '__toString') {
             return "function $name()";
         }
-        
+
         // This wonky try-catch is a work around for a faulty method_exists()
         // in early versions of PHP 5 which would return false for static
         // methods. The Reflection classes work fine, but hasMethod()
@@ -336,7 +336,7 @@ class SimpleReflection {
      *    @access private
      */
     protected function getParameterSignatures($method) {
-        $signatures = array();
+        $signatures = [];
         foreach ($method->getParameters() as $parameter) {
             $signature = '';
             $type = $parameter->getClass();

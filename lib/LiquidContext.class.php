@@ -1,9 +1,9 @@
 <?php
 /**
  * Context keeps the variable stack and resolves variables, as well as keywords
- * 
+ *
  * @package Liquid
- * @copyright Copyright (c) 2011-2012 Harald Hanek, 
+ * @copyright Copyright (c) 2011-2012 Harald Hanek,
  * fork of php-liquid (c) 2006 Mateo Murphy,
  * based on Liquid for Ruby (c) 2006 Tobias Luetke
  * @license http://harrydeluxe.mit-license.org
@@ -37,7 +37,7 @@ class LiquidContext
      *
      * @var array
      */
-    public $environments = array();
+    public $environments = [];
 
     /**
      * Constructor
@@ -45,13 +45,11 @@ class LiquidContext
      * @param array $assigns
      * @param array $registers
      */
-    public function __construct($assigns = null, $registers = array())
+    public function __construct($assigns = null, $registers = [])
     {
         $this->_assigns = (isset($assigns)) ? array(
             $assigns
-        ) : array(
-            array()
-        );
+        ) : [[]];
         $this->registers = $registers;
         $this->_filterbank = new LiquidFilterbank($this);
     }
@@ -100,7 +98,7 @@ class LiquidContext
      */
     public function push()
     {
-        array_unshift($this->_assigns, array());
+        array_unshift($this->_assigns, []);
         return true;
     }
 
@@ -123,7 +121,7 @@ class LiquidContext
 
     /**
      * Replaces []
-     * 
+     *
      * @param string
      * @return mixed
      */
@@ -168,13 +166,13 @@ class LiquidContext
 
     /**
      * Resolve a key by either returning the appropriate literal or by looking up the appropriate variable
-     * 
+     *
      * Test for empty has been moved to interpret condition, in LiquidDecisionBlock
      *
      * @param string $key
      * @return mixed
      */
-    public function resolve($key)
+    public function resolve(string $key)
     {
         // this shouldn't happen
         if (is_array($key))
@@ -258,7 +256,7 @@ class LiquidContext
      * @param string $key
      * @return mixed
      */
-    public function variable($key)
+    public function variable(string $key)
     {
         /* Support [0] style array indicies */
         if (preg_match("|\[[0-9]+\]|", $key))

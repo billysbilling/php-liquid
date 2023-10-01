@@ -1,15 +1,15 @@
 <?php
 /**
  * An if statement
- * 
+ *
  * @example
  * {% if true %} YES {% else %} NO {% endif %}
- * 
+ *
  * will return:
  * YES
  *
  * @package Liquid
- * @copyright Copyright (c) 2011-2012 Harald Hanek, 
+ * @copyright Copyright (c) 2011-2012 Harald Hanek,
  * fork of php-liquid (c) 2006 Mateo Murphy,
  * based on Liquid for Ruby (c) 2006 Tobias Luetke
  * @license http://harrydeluxe.mit-license.org
@@ -23,14 +23,14 @@ class LiquidTagIf extends LiquidDecisionBlock
      *
      * @var array
      */
-    private $_nodelistHolders = array();
+    private $_nodelistHolders = [];
 
     /**
      * Array holding the block type, block markup (conditions) and block nodelist
      *
      * @var array
      */
-    private $_blocks = array();
+    private $_blocks = [];
 
 
     /**
@@ -67,7 +67,7 @@ class LiquidTagIf extends LiquidDecisionBlock
         {
             /* Update reference to nodelistHolder for this block */
             $this->_nodelist = &$this->_nodelistHolders[count($this->_blocks) + 1];
-            $this->_nodelistHolders[count($this->_blocks) + 1] = array();
+            $this->_nodelistHolders[count($this->_blocks) + 1] = [];
 
             array_push($this->_blocks, array(
                 $tag, $params, &$this->_nodelist
@@ -115,7 +115,7 @@ class LiquidTagIf extends LiquidDecisionBlock
                 /* Extract individual conditions */
                 $temp = $logicalRegex->split($block[1]);
 
-                $conditions = array();
+                $conditions = [];
 
                 foreach($temp as $condition)
                 {

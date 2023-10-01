@@ -100,7 +100,7 @@ class SimpleTagBuilder {
      *    @access private
      */
     protected function keysToLowerCase($map) {
-        $lower = array();
+        $lower = [];
         foreach ($map as $key => $value) {
             $lower[strtolower($key)] = $value;
         }
@@ -182,7 +182,7 @@ class SimpleTag {
             $this->addTag($tag);
         }
     }
-    
+
     /**
      *    Accessor for tag name.
      *    @return string       Name of tag.
@@ -198,7 +198,7 @@ class SimpleTag {
      *    @access public
      */
     function getChildElements() {
-        return array();
+        return [];
     }
 
     /**
@@ -814,7 +814,7 @@ class SimpleSelectionTag extends SimpleWidget {
      */
     function __construct($attributes) {
         parent::__construct('select', $attributes);
-        $this->options = array();
+        $this->options = [];
         $this->choice = false;
     }
 
@@ -902,7 +902,7 @@ class MultipleSelectionTag extends SimpleWidget {
      */
     function __construct($attributes) {
         parent::__construct('select', $attributes);
-        $this->options = array();
+        $this->options = [];
         $this->values = false;
     }
 
@@ -928,12 +928,12 @@ class MultipleSelectionTag extends SimpleWidget {
 
     /**
      *    Scans options for defaults to populate the
-     *    value array().
+     *    value [].
      *    @return array        Selected fields.
      *    @access public
      */
     function getDefault() {
-        $default = array();
+        $default = [];
         for ($i = 0, $count = count($this->options); $i < $count; $i++) {
             if ($this->options[$i]->getAttribute('selected') !== false) {
                 $default[] = $this->options[$i]->getDefault();
@@ -951,7 +951,7 @@ class MultipleSelectionTag extends SimpleWidget {
      *    @access public
      */
     function setValue($desired) {
-        $achieved = array();
+        $achieved = [];
         foreach ($desired as $value) {
             $success = false;
             for ($i = 0, $count = count($this->options); $i < $count; $i++) {
@@ -1170,7 +1170,7 @@ class SimpleCheckboxTag extends SimpleWidget {
  *    @subpackage WebTester
  */
 class SimpleTagGroup {
-    private $widgets = array();
+    private $widgets = [];
 
     /**
      *    Adds a tag to the group.
@@ -1268,7 +1268,7 @@ class SimpleCheckboxGroup extends SimpleTagGroup {
      *    @access public
      */
     function getValue() {
-        $values = array();
+        $values = [];
         $widgets = $this->getWidgets();
         for ($i = 0, $count = count($widgets); $i < $count; $i++) {
             if ($widgets[$i]->getValue() !== false) {
@@ -1284,7 +1284,7 @@ class SimpleCheckboxGroup extends SimpleTagGroup {
      *    @access public
      */
     function getDefault() {
-        $values = array();
+        $values = [];
         $widgets = $this->getWidgets();
         for ($i = 0, $count = count($widgets); $i < $count; $i++) {
             if ($widgets[$i]->getDefault() !== false) {
@@ -1327,7 +1327,7 @@ class SimpleCheckboxGroup extends SimpleTagGroup {
      *    @access private
      */
     protected function valuesArePossible($values) {
-        $matches = array();
+        $matches = [];
         $widgets = &$this->getWidgets();
         for ($i = 0, $count = count($widgets); $i < $count; $i++) {
             $possible = $widgets[$i]->getAttribute('value');
@@ -1367,7 +1367,7 @@ class SimpleCheckboxGroup extends SimpleTagGroup {
      */
     protected function makeArray($value) {
         if ($value === false) {
-            return array();
+            return [];
         }
         if (is_string($value)) {
             return array($value);

@@ -1,13 +1,13 @@
 <?php
 /**
  * Performs an assignment of one variable to another
- * 
- * @example 
+ *
+ * @example
  * {% assign var = var %}
  * {% assign var = "hello" | upcase %}
  *
  * @package Liquid
- * @copyright Copyright (c) 2011-2012 Harald Hanek, 
+ * @copyright Copyright (c) 2011-2012 Harald Hanek,
  * fork of php-liquid (c) 2006 Mateo Murphy,
  * based on Liquid for Ruby (c) 2006 Tobias Luetke
  * @license http://harrydeluxe.mit-license.org
@@ -43,7 +43,7 @@ class LiquidTagAssign extends LiquidTag
         $filterNameRegexp = new LiquidRegexp('/\s*(\w+)/');
         $filterArgumentRegexp = new LiquidRegexp('/(?:' . LIQUID_FILTER_ARGUMENT_SEPARATOR . '|' . LIQUID_ARGUMENT_SEPARATOR . ')\s*(' . LIQUID_QUOTED_FRAGMENT . ')/');
 
-        $this->filters = array();
+        $this->filters = [];
 
         if ($filterSeperatorRegexp->match($markup))
         {
@@ -88,7 +88,7 @@ class LiquidTagAssign extends LiquidTag
         {
             list($filtername, $filterArgKeys) = $filter;
 
-            $filterArgValues = array();
+            $filterArgValues = [];
 
             foreach($filterArgKeys as $arg_key)
             {

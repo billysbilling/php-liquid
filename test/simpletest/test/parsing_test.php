@@ -26,7 +26,7 @@ abstract class TestOfParsing extends UnitTestCase {
 
     function testPageWithNoUrlsGivesEmptyArrayOfLinks() {
         $page = $this->whenVisiting('http://here/', '<html><body><p>Stuff</p></body></html>');
-        $this->assertIdentical($page->getUrls(), array());
+        $this->assertIdentical($page->getUrls(), []);
     }
 
     function testAddAbsoluteLink() {
