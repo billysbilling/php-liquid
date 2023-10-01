@@ -88,21 +88,6 @@ class ContextTest extends UnitTestCase
 		$this->assertEqual(4, $this->context->get('numbers.size'));
 	}
 
-
-	function test_add_filter()
-	{
-		$context = new LiquidContext();
-		$context->addFilters(new HiFilter());
-		$this->assertEqual('hi? hi!', $context->invoke('hi', 'hi?'));
-
-		$context = new LiquidContext();
-		$this->assertEqual('hi?', $context->invoke('hi', 'hi?'));
-
-		$context->addFilters(new HiFilter());
-		$this->assertEqual('hi? hi!', $context->invoke('hi', 'hi?'));
-	}
-
-
 	// skip this one for now, as we haven't implemented global filters yet
 	function test_override_global_filter()
 	{

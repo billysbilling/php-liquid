@@ -42,27 +42,11 @@ class LiquidFilterbank
 
     /**
      * Adds a filter to the bank
-     *
-     * @param mixed $filter Can either be an object, the name of a class (in which case the
      * filters will be called statically) or the name of a function.
      * @return bool
      */
-    function addFilter(mixed $filter): bool
+    function addFilter(string $filter): bool
     {
-        // if the passed filter was an object, store the object for future reference.
-        if (is_object($filter)) {
-            $filter->context = $this->context;
-            $name = get_class($filter);
-            $this->filters[$name] = $filter;
-            $filter = $name;
-
-        }
-
-        // if it wasn't an object an isn't a string either, it's a bad parameter
-        if (!is_string($filter)) {
-            throw new LiquidException("Parameter passed to addFilter must be an object or a string");
-        }
-
         // if the filter is a class, register all its methods
         if (class_exists($filter)) {
             $methods = array_flip(get_class_methods($filter));

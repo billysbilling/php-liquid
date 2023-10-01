@@ -56,17 +56,6 @@ class LiquidContext
 
 
     /**
-     * Add a filter to the context
-     *
-     * @param mixed $filter
-     */
-    public function addFilters($filter)
-    {
-        $this->_filterbank->addFilter($filter);
-    }
-
-
-    /**
      * Invoke the filter that matches given name
      *
      * @param string $name The name of the filter
