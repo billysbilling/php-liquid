@@ -186,30 +186,11 @@ class LiquidTemplate
      * Renders the current template
      *
      * @param array $assigns An array of values for the template
-     * @param array $filters Additional filters for the template
-     * @param array $registers Additional registers for the template
      * @return string
      */
-    public function render(array $assigns = [], $filters = null, $registers = null)
+    public function render(array $assigns = [])
     {
-        $context = new LiquidContext($assigns, $registers);
-
-        if (!is_null($filters))
-        {
-            if (is_array($filters))
-            {
-                array_merge($this->_filters, $filters);
-            }
-            else
-            {
-                $this->_filters[] = $filters;
-            }
-        }
-
-        foreach($this->_filters as $filter)
-        {
-            $context->addFilters($filter);
-        }
+        $context = new LiquidContext($assigns);
 
         return $this->_root->render($context);
     }
