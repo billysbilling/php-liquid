@@ -39,7 +39,7 @@ class LiquidBlock extends LiquidTag
         $tagRegexp = new LiquidRegexp('/^' . LIQUID_TAG_START . '\s*(\w+)\s*(.*)?' . LIQUID_TAG_END . '$/');
         $variableStartRegexp = new LiquidRegexp('/^' . LIQUID_VARIABLE_START . '/');
 
-        $this->_nodelist = array();
+        $this->_nodelist = [];
 
         if (!is_array($tokens))
         {

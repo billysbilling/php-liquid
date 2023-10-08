@@ -287,14 +287,14 @@ class TestOfMockObjectsOutput extends UnitTestCase {
 
     function testEmptyMatching() {
         $dummy = &new MockDummy();
-        $dummy->expect('a', array());
+        $dummy->expect('a', []);
         $dummy->a();
         $dummy->a(null);        // Fail.
     }
 
     function testEmptyMatchingWithCustomMessage() {
         $dummy = &new MockDummy();
-        $dummy->expect('a', array(), 'My expectation message: %s');
+        $dummy->expect('a', [], 'My expectation message: %s');
         $dummy->a();
         $dummy->a(null);        // Fail.
     }
@@ -373,8 +373,8 @@ class TestOfMockObjectsOutput extends UnitTestCase {
 class TestOfPastBugs extends UnitTestCase {
 
     function testMixedTypes() {
-        $this->assertEqual(array(), null, "%s -> Pass");
-        $this->assertIdentical(array(), null, "%s -> Fail");    // Fail.
+        $this->assertEqual([], null, "%s -> Pass");
+        $this->assertIdentical([], null, "%s -> Fail");    // Fail.
     }
 
     function testMockWildcards() {
@@ -481,14 +481,14 @@ $test->add(new TestOfSkippingOrElse());
 $test->add(new TestOfSkippingTwiceOver());
 $test->add(new TestThatShouldNotBeSkipped());
 
-if (isset($_GET['xml']) || in_array('xml', (isset($argv) ? $argv : array()))) {
+if (isset($_GET['xml']) || in_array('xml', (isset($argv) ? $argv : []))) {
     $reporter = new XmlReporter();
 } elseif (TextReporter::inCli()) {
     $reporter = new TextReporter();
 } else {
     $reporter = new PassesAsWellReporter();
 }
-if (isset($_GET['dry']) || in_array('dry', (isset($argv) ? $argv : array()))) {
+if (isset($_GET['dry']) || in_array('dry', (isset($argv) ? $argv : []))) {
     $reporter->makeDry();
 }
 exit ($test->run($reporter) ? 0 : 1);

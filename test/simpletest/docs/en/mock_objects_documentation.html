@@ -94,7 +94,7 @@
                 Set them up with fairly tight expectations and you will
                 hardly need manual assertions at all.
             </p>
-        
+
         <h2>
 <a class="target" name="creation"></a>Creating mock objects</h2>
             <p>
@@ -499,7 +499,7 @@ class DatabaseTest extends UnitTestCase {
         $alert = new MockAlerts();<strong>
         $alert-&gt;expectOnce('notify', 'Database is busy - please retry');</strong>
         $finder = new UserFinder($connection, $alert);
-        $this-&gt;assertIdentical($finder-&gt;findNames(), array());
+        $this-&gt;assertIdentical($finder-&gt;findNames(), []);
     }
 }
 </pre>
@@ -566,7 +566,7 @@ Mock::generate('DatabaseConnection', <strong>'MockDatabaseConnectionWithOptions'
                 for the message to end up.
                 We cover expectations next.
             </p>
-        
+
         <h2>
 <a class="target" name="expectations"></a>Mocks as critics</h2>
             <p>
@@ -823,7 +823,7 @@ function testAllRequiredFieldsHighlightedOnEmptyRequest() {
                 Also the original failure message can be embedded in the output
                 as "%s".
             </p>
-        
+
     </div>
         References and related information...
         <ul>

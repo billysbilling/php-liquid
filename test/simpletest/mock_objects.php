@@ -105,7 +105,7 @@ class ParametersExpectation extends SimpleExpectation {
                     "] but got " . count($parameters) .
                     " arguments of [" . $this->renderArguments($parameters) . "]";
         }
-        $messages = array();
+        $messages = [];
         for ($i = 0; $i < count($expected); $i++) {
             $comparison = $this->coerceToExpectation($expected[$i]);
             if (! $comparison->test($parameters[$i])) {
@@ -137,7 +137,7 @@ class ParametersExpectation extends SimpleExpectation {
      *    @return string        Simple description of type and value.
      */
     protected function renderArguments($args) {
-        $descriptions = array();
+        $descriptions = [];
         if (is_array($args)) {
             foreach ($args as $arg) {
                 $dumper = new SimpleDumper();
@@ -290,7 +290,7 @@ class SimpleSignatureMap {
      *    Creates an empty call map.
      */
     function __construct() {
-        $this->map = array();
+        $this->map = [];
     }
 
     /**
@@ -300,7 +300,7 @@ class SimpleSignatureMap {
      */
     function add($parameters, $action) {
         $place = count($this->map);
-        $this->map[$place] = array();
+        $this->map[$place] = [];
         $this->map[$place]['params'] = new ParametersExpectation($parameters);
         $this->map[$place]['content'] = $action;
     }
@@ -380,8 +380,8 @@ class SimpleCallSchedule {
      *    Creates an empty call map.
      */
     function __construct() {
-        $this->always = array();
-        $this->at = array();
+        $this->always = [];
+        $this->at = [];
     }
 
     /**
@@ -414,7 +414,7 @@ class SimpleCallSchedule {
         $args = $this->replaceWildcards($args);
         $method = strtolower($method);
         if (! isset($this->at[$method])) {
-            $this->at[$method] = array();
+            $this->at[$method] = [];
         }
         if (! isset($this->at[$method][$step])) {
             $this->at[$method][$step] = new SimpleSignatureMap();
@@ -654,11 +654,11 @@ class SimpleMock {
     function SimpleMock() {
         $this->actions = new SimpleCallSchedule();
         $this->expectations = new SimpleCallSchedule();
-        $this->call_counts = array();
-        $this->expected_counts = array();
-        $this->max_counts = array();
-        $this->expected_args = array();
-        $this->expected_args_at = array();
+        $this->call_counts = [];
+        $this->expected_counts = [];
+        $this->max_counts = [];
+        $this->expected_args = [];
+        $this->expected_args_at = [];
         $this->getCurrentTestCase()->tell($this);
     }
 
@@ -901,7 +901,7 @@ class SimpleMock {
         $this->checkArgumentsIsArray($args, 'set expected arguments at time');
         $args = $this->replaceWildcards($args);
         if (! isset($this->expected_args_at[$timing])) {
-            $this->expected_args_at[$timing] = array();
+            $this->expected_args_at[$timing] = [];
         }
         $method = strtolower($method);
         $message .= Mock::getExpectationLine();
@@ -1284,7 +1284,7 @@ class MockGenerator {
         if ($mock_reflection->classExistsSansAutoload()) {
             return false;
         }
-        $code = $this->createClassCode($methods ? $methods : array());
+        $code = $this->createClassCode($methods ? $methods : []);
         return eval("$code return \$code;");
     }
 
@@ -1307,10 +1307,10 @@ class MockGenerator {
             return false;
         }
         if ($this->reflection->isInterface() || $this->reflection->hasFinal()) {
-            $code = $this->createClassCode($methods ? $methods : array());
+            $code = $this->createClassCode($methods ? $methods : []);
             return eval("$code return \$code;");
         } else {
-            $code = $this->createSubclassCode($methods ? $methods : array());
+            $code = $this->createSubclassCode($methods ? $methods : []);
             return eval("$code return \$code;");
         }
     }

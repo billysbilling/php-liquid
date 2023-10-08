@@ -213,13 +213,13 @@ class SimpleTest {
         return array(
                 'Parsers' => false,
                 'MockBaseClass' => 'SimpleMock',
-                'IgnoreList' => array(),
+                'IgnoreList' => [],
                 'DefaultProxy' => false,
                 'DefaultProxyUsername' => false,
                 'DefaultProxyPassword' => false,
                 'Preferred' => array(new HtmlReporter(), new TextReporter(), new XmlReporter()));
     }
-    
+
     /**
      *    @deprecated
      */
@@ -255,7 +255,7 @@ class SimpleTestContext {
      *    @access public
      */
     function clear() {
-        $this->resources = array();
+        $this->resources = [];
     }
 
     /**
@@ -385,7 +385,7 @@ class SimpleStackTrace {
         if (function_exists('debug_backtrace')) {
             return array_reverse(debug_backtrace());
         }
-        return array();
+        return [];
     }
 }
 ?>

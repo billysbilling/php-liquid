@@ -66,7 +66,7 @@ class LiquidVariable
         }
         else
         {
-            $this->_filters = array();
+            $this->_filters = [];
         }
     }
 
@@ -105,7 +105,7 @@ class LiquidVariable
         {
             list($filtername, $filterArgKeys) = $filter;
 
-            $filterArgValues = array();
+            $filterArgValues = [];
 
             foreach($filterArgKeys as $arg_key)
             {

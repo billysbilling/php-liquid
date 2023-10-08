@@ -5,13 +5,13 @@ class LiquidTestcase extends UnitTestCase
 {
 
 	public $filters;
-	
+
 	public function assert_template_result($expected, $template, $assigns = null, $message = "%s", $debug = false) {
-	
+
 		if (is_null($assigns)) {
-			$assigns = array();
+			$assigns = [];
 		}
-		
+
 		$result = new LiquidTemplate;
 
 		$result->parse($template);
@@ -19,12 +19,12 @@ class LiquidTestcase extends UnitTestCase
 		if ($debug) {
 			debug($result);
 		}
-		
+
 		$this->assertEqual($expected, $result->render($assigns, $this->filters), $message);
 	}
 
-	
-	public function assertTrueHelper($templateString, $expected, $data = array())
+
+	public function assertTrueHelper($templateString, $expected, $data = [])
 	{
 		$template = new LiquidTemplate;
 		$template->parse($templateString);

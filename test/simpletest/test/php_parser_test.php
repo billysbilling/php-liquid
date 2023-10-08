@@ -331,7 +331,7 @@ class TestOfSimpleHtmlLexer extends UnitTestCase {
         $parser->expectNever('acceptTextToken');
         $parser->expectAtLeastOnce('ignore');
         $lexer = new SimpleHtmlLexer($parser);
-        $this->assertTrue($lexer->parse("<SCRIPT>Javascript code {';:^%^%£$'@\"*(}</SCRIPT>"));
+        $this->assertTrue($lexer->parse("<SCRIPT>Javascript code {';:^%^%ï¿½$'@\"*(}</SCRIPT>"));
     }
 
     function testSkipHtmlComments() {
@@ -382,7 +382,7 @@ class TestOfHtmlSaxParser extends UnitTestCase {
 
     function testFramesetTag() {
         $listener = $this->createListener();
-        $listener->expectOnce('startElement', array('frameset', array()));
+        $listener->expectOnce('startElement', array('frameset', []));
         $listener->expectOnce('addContent', array('Frames'));
         $listener->expectOnce('endElement', array('frameset'));
         $parser = new SimpleHtmlSaxParser($listener);
@@ -400,7 +400,7 @@ class TestOfHtmlSaxParser extends UnitTestCase {
 
     function testTagInsideContent() {
         $listener = $this->createListener();
-        $listener->expectOnce('startElement', array('a', array()));
+        $listener->expectOnce('startElement', array('a', []));
         $listener->expectAt(0, 'addContent', array('<html>'));
         $listener->expectAt(1, 'addContent', array('</html>'));
         $parser = new SimpleHtmlSaxParser($listener);
@@ -409,7 +409,7 @@ class TestOfHtmlSaxParser extends UnitTestCase {
 
     function testTagWithInternalContent() {
         $listener = $this->createListener();
-        $listener->expectOnce('startElement', array('a', array()));
+        $listener->expectOnce('startElement', array('a', []));
         $listener->expectOnce('addContent', array('label'));
         $listener->expectOnce('endElement', array('a'));
         $parser = new SimpleHtmlSaxParser($listener);
@@ -476,7 +476,7 @@ class TestOfHtmlSaxParser extends UnitTestCase {
 
     function testNestedFrameInFrameset() {
         $listener = $this->createListener();
-        $listener->expectAt(0, 'startElement', array('frameset', array()));
+        $listener->expectAt(0, 'startElement', array('frameset', []));
         $listener->expectAt(1, 'startElement', array('frame', array('src' => 'frame.html')));
         $listener->expectCallCount('startElement', 2);
         $listener->expectOnce('addContent', array('<noframes>Hello</noframes>'));

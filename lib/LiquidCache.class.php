@@ -16,7 +16,7 @@ abstract class LiquidCache
     protected $_path;
 
 
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if (isset($options['cache_expire']))
         {

@@ -58,7 +58,7 @@ class LiquidTagExtends extends LiquidTag
         $blockstartRegexp = new LiquidRegexp('/^' . LIQUID_TAG_START . '\s*block (\w+)\s*(.*)?' . LIQUID_TAG_END . '$/');
         $blockendRegexp = new LiquidRegexp('/^' . LIQUID_TAG_START . '\s*endblock\s*?' . LIQUID_TAG_END . '$/');
 
-        $b = array();
+        $b = [];
         $name = null;
 
         foreach($tokens as $token)
@@ -66,7 +66,7 @@ class LiquidTagExtends extends LiquidTag
             if($blockstartRegexp->match($token))
             {
                 $name = $blockstartRegexp->matches[1];
-                $b[$name] = array();
+                $b[$name] = [];
             }
             else if($blockendRegexp->match($token))
             {
@@ -102,7 +102,7 @@ class LiquidTagExtends extends LiquidTag
 
         // tokens in this new document
         $maintokens = LiquidTemplate::tokenize($source);
-        
+
         $eRegexp = new LiquidRegexp('/^' . LIQUID_TAG_START . '\s*extends (.*)?' . LIQUID_TAG_END . '$/');
         foreach($maintokens as $maintoken)
             if($eRegexp->match($maintoken))
@@ -110,7 +110,7 @@ class LiquidTagExtends extends LiquidTag
                 $m = $eRegexp->matches[1];
                 break;
             }
-        
+
         if(isset($m))
         {
             $rest = array_merge($maintokens, $tokens);
@@ -122,10 +122,7 @@ class LiquidTagExtends extends LiquidTag
             $blockstartRegexp = new LiquidRegexp('/^' . LIQUID_TAG_START . '\s*block (\w+)\s*(.*)?' . LIQUID_TAG_END . '$/');
             $blockendRegexp = new LiquidRegexp('/^' . LIQUID_TAG_START . '\s*endblock\s*?' . LIQUID_TAG_END . '$/');
 
-            $b = array();
-            $name = null;
-
-            $rest = array();
+            $rest = [];
             $aufzeichnen = false;
 
             for($i = 0; $i < count($maintokens); $i++)

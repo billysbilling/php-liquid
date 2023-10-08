@@ -1,12 +1,12 @@
 <?php
 /**
  * A switch statememt
- * 
+ *
  * @example
  * {% case condition %}{% when foo %} foo {% else %} bar {% endcase %}
  *
  * @package Liquid
- * @copyright Copyright (c) 2011-2012 Harald Hanek, 
+ * @copyright Copyright (c) 2011-2012 Harald Hanek,
  * fork of php-liquid (c) 2006 Mateo Murphy,
  * based on Liquid for Ruby (c) 2006 Tobias Luetke
  * @license http://harrydeluxe.mit-license.org
@@ -53,8 +53,8 @@ class LiquidTagCase extends LiquidDecisionBlock
      */
     public function __construct($markup, &$tokens, &$fileSystem)
     {
-        $this->nodelists = array();
-        $this->elseNodelist = array();
+        $this->nodelists = [];
+        $this->elseNodelist = [];
 
         parent::__construct($markup, $tokens, $fileSystem);
 
@@ -100,7 +100,7 @@ class LiquidTagCase extends LiquidDecisionBlock
                 {
                     $this->push_nodelist();
                     $this->right = $whenSyntaxRegexp->matches[0];
-                    $this->_nodelist = array();
+                    $this->_nodelist = [];
 
                 }
                 else
@@ -114,7 +114,7 @@ class LiquidTagCase extends LiquidDecisionBlock
                 $this->push_nodelist();
                 $this->right = null;
                 $this->elseNodelist = &$this->_nodelist;
-                $this->_nodelist = array();
+                $this->_nodelist = [];
                 break;
 
             default:
@@ -145,7 +145,7 @@ class LiquidTagCase extends LiquidDecisionBlock
      */
     public function render(&$context)
     {
-        $output = ''; // array();
+        $output = ''; // [];
         $run_else_block = true;
 
         foreach($this->nodelists as $data)

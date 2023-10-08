@@ -56,7 +56,7 @@ class LiquidLocalFileSystem extends LiquidBlankFileSystem
      * @param string $templatePath
      * @return string
      */
-    public function fullPath($templatePath)
+    public function fullPath(string $templatePath)
     {
         $nameRegex = LIQUID_INCLUDE_ALLOW_EXT ? new LiquidRegexp('/^[^.\/][a-zA-Z0-9_\.\/]+$/') : new LiquidRegexp('/^[^.\/][a-zA-Z0-9_\/]+$/');
 
@@ -75,7 +75,7 @@ class LiquidLocalFileSystem extends LiquidBlankFileSystem
             $fullPath = LIQUID_INCLUDE_ALLOW_EXT ? $this->_root . $templatePath : $this->_root . LIQUID_INCLUDE_PREFIX . $templatePath . '.' . LIQUID_INCLUDE_SUFFIX;
         }
 
-        $rootRegex = new LiquidRegexp('/' . preg_quote(realpath($this->_root), '/') . '/');
+        $rootRegex = new LiquidRegexp('/' . preg_quote((string) realpath($this->_root), '/') . '/');
 
 
         if (!$rootRegex->match(realpath($fullPath)))

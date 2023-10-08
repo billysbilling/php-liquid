@@ -488,10 +488,10 @@ class SimpleTestXmlParser {
     function SimpleTestXmlParser(&$listener) {
         $this->listener = &$listener;
         $this->expat = &$this->createParser();
-        $this->tag_stack = array();
+        $this->tag_stack = [];
         $this->in_content_tag = false;
         $this->content = '';
-        $this->attributes = array();
+        $this->attributes = [];
     }
 
     /**

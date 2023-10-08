@@ -32,11 +32,10 @@ class LiquidRegexp
      * Constructor
      *
      * @param string $pattern
-     * @return Regexp
      */
-    public function __construct($pattern)
+    public function __construct(string $pattern)
     {
-        $this->pattern = (substr($pattern, '0', 1) != '/') ? '/' . $this->quote($pattern) . '/' : $pattern;
+        $this->pattern = ($pattern[0] !== '/') ? '/' . $this->quote($pattern) . '/' : $pattern;
     }
 
 
@@ -46,7 +45,7 @@ class LiquidRegexp
      * @param string $string
      * @return string
      */
-    function quote($string)
+    public function quote(string $string): string
     {
         return preg_quote($string, '/');
     }
@@ -58,7 +57,7 @@ class LiquidRegexp
      * @param string $string
      * @return array
      */
-    function scan($string)
+    function scan(string $string): array
     {
         $result = preg_match_all($this->pattern, $string, $matches);
 
@@ -69,7 +68,7 @@ class LiquidRegexp
 
         array_shift($matches);
 
-        $result = array();
+        $result = [];
 
         foreach($matches as $matchKey => $subMatches)
         {
@@ -89,7 +88,7 @@ class LiquidRegexp
      * @param string $string
      * @return int 1 if there was a match, 0 if there wasn't
      */
-    public function match($string)
+    public function match(string $string): int
     {
         return preg_match($this->pattern, $string, $this->matches);
     }
@@ -101,7 +100,7 @@ class LiquidRegexp
      * @param string $string
      * @return int The number of matches
      */
-    function match_all($string)
+    public function match_all(string $string): int
     {
         return preg_match_all($this->pattern, $string, $this->matches);
     }
@@ -114,8 +113,8 @@ class LiquidRegexp
      * @param int $limit Limits the amount of results returned
      * @return array
      */
-    function split($string, $limit = -1)
+    function split(string $string, int $limit = -1): array
     {
-        return preg_split($this->pattern, $string, (int) $limit);
+        return preg_split($this->pattern, $string, $limit);
     }
 }

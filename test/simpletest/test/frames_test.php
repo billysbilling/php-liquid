@@ -165,7 +165,7 @@ class TestOfFrameNavigation extends UnitTestCase {
         $page->expectNever('getRaw');
 
         $frame = new MockSimplePage();
-        $frame->setReturnValue('getFrameFocus', array());
+        $frame->setReturnValue('getFrameFocus', []);
         $frame->setReturnValue('getRaw', 'Stuff');
 
         $frameset = new SimpleFrameset($page);
@@ -183,11 +183,11 @@ class TestOfFrameNavigation extends UnitTestCase {
 
         $frame1 = new MockSimplePage();
         $frame1->setReturnValue('getRaw', 'Stuff1');
-        $frame1->setReturnValue('getFrameFocus', array());
+        $frame1->setReturnValue('getFrameFocus', []);
 
         $frame2 = new MockSimplePage();
         $frame2->setReturnValue('getRaw', 'Stuff2');
-        $frame2->setReturnValue('getFrameFocus', array());
+        $frame2->setReturnValue('getFrameFocus', []);
 
         $frameset = new SimpleFrameset($page);
         $frameset->addFrame($frame1);
@@ -213,11 +213,11 @@ class TestOfFrameNavigation extends UnitTestCase {
 
         $frame1 = new MockSimplePage();
         $frame1->setReturnValue('getRaw', 'Stuff1');
-        $frame1->setReturnValue('getFrameFocus', array());
+        $frame1->setReturnValue('getFrameFocus', []);
 
         $frame2 = new MockSimplePage();
         $frame2->setReturnValue('getRaw', 'Stuff2');
-        $frame2->setReturnValue('getFrameFocus', array());
+        $frame2->setReturnValue('getFrameFocus', []);
 
         $frameset = new SimpleFrameset($page);
         $frameset->addFrame($frame1, 'A');
@@ -255,7 +255,7 @@ class TestOfFramesetPageInterface extends UnitTestCase {
     }
 
     private function getPageMethods() {
-        $methods = array();
+        $methods = [];
         foreach (get_class_methods('SimplePage') as $method) {
             if (strtolower($method) == strtolower('SimplePage')) {
                 continue;
@@ -275,7 +275,7 @@ class TestOfFramesetPageInterface extends UnitTestCase {
     }
 
     private function getFramesetMethods() {
-        $methods = array();
+        $methods = [];
         foreach (get_class_methods('SimpleFrameset') as $method) {
             if (strtolower($method) == strtolower('SimpleFrameset')) {
                 continue;
@@ -292,7 +292,7 @@ class TestOfFramesetPageInterface extends UnitTestCase {
     }
 
     function testFramsetHasPageInterface() {
-        $difference = array();
+        $difference = [];
         foreach ($this->page_interface as $method) {
             if (! in_array($method, $this->frameset_interface)) {
                 $this->fail("No [$method] in Frameset class");

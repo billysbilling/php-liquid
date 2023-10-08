@@ -1,14 +1,14 @@
 <?php
 /**
  * Loops over an array, assigning the current value to a given variable
- * 
+ *
  * @example
  * {%for item in array%} {{item}} {%endfor%}
- * 
+ *
  * With an array of 1, 2, 3, 4, will return 1 2 3 4
- * 
+ *
  * @package Liquid
- * @copyright Copyright (c) 2011-2012 Harald Hanek, 
+ * @copyright Copyright (c) 2011-2012 Harald Hanek,
  * fork of php-liquid (c) 2006 Mateo Murphy,
  * based on Liquid for Ruby (c) 2006 Tobias Luetke
  * @license http://harrydeluxe.mit-license.org
@@ -69,7 +69,7 @@ class LiquidTagFor extends LiquidBlock
     {
         if (!isset($context->registers['for']))
         {
-            $context->registers['for'] = array();
+            $context->registers['for'] = [];
         }
 
         $collection = $context->get($this->_collectionName);

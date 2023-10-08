@@ -1,9 +1,9 @@
 <?php
 /**
  * Liquid for PHP
- * 
+ *
  * @package Liquid
- * @copyright Copyright (c) 2011-2012 Harald Hanek, 
+ * @copyright Copyright (c) 2011-2012 Harald Hanek,
  * fork of php-liquid (c) 2006 Mateo Murphy,
  * based on Liquid for Ruby (c) 2006 Tobias Luetke
  * @license http://harrydeluxe.mit-license.org
@@ -125,11 +125,11 @@ class Liquid
      * Flatten a multidimensional array into a single array. Does not maintain keys.
      *
      * @param array $array
-     * @return array 
+     * @return array
      */
     public static function array_flatten($array)
     {
-        $return = array();
+        $return = [];
 
         foreach($array as $element)
         {
@@ -148,7 +148,7 @@ class Liquid
 
     /**
      * Checks if class exists in $_coreClasses array
-     * 
+     *
      * @param string $className class name
      * @return boolean whether the class exists in $_coreClasses
      */

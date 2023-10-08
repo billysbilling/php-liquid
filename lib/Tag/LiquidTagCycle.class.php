@@ -1,21 +1,21 @@
 <?php
 /**
  * Cycles between a list of values; calls to the tag will return each value in turn
- * 
+ *
  * @example
  * {%cycle "one", "two"%} {%cycle "one", "two"%} {%cycle "one", "two"%}
- * 
+ *
  * this will return:
  * one two one
- * 
+ *
  * Cycles can also be named, to differentiate between multiple cycle with the same values:
  * {%cycle 1: "one", "two" %} {%cycle 2: "one", "two" %} {%cycle 1: "one", "two" %} {%cycle 2: "one", "two" %}
- * 
+ *
  * will return
  * one one two two
- * 
+ *
  * @package Liquid
- * @copyright Copyright (c) 2011-2012 Harald Hanek, 
+ * @copyright Copyright (c) 2011-2012 Harald Hanek,
  * fork of php-liquid (c) 2006 Mateo Murphy,
  * based on Liquid for Ruby (c) 2006 Tobias Luetke
  * @license http://harrydeluxe.mit-license.org
@@ -65,7 +65,7 @@ class LiquidTagCycle extends LiquidTag
 
     /**
      * Renders the tag
-     * 
+     *
      * @var LiquidContext $context
      * @return string
      */
@@ -103,7 +103,7 @@ class LiquidTagCycle extends LiquidTag
 
     /**
      * Extract variables from a string of markup
-     * 
+     *
      * @param string $markup
      * @return array;
      */
@@ -111,7 +111,7 @@ class LiquidTagCycle extends LiquidTag
     {
         $regexp = new LiquidRegexp('/\s*(' . LIQUID_QUOTED_FRAGMENT . ')\s*/');
         $parts = explode(',', $markup);
-        $result = array();
+        $result = [];
 
         foreach($parts as $part)
         {

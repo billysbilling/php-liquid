@@ -34,7 +34,7 @@ class LiquidTemplate
     /**
      * @var array Custom tags
      */
-    private static $_tags = array();
+    private static $_tags = [];
 
 
     private static $_cache;
@@ -48,7 +48,7 @@ class LiquidTemplate
     public function __construct($path = null, $cache = null)
     {
         $this->_fileSystem = (isset($path)) ? new LiquidLocalFileSystem($path) : new LiquidBlankFileSystem();
-        $this->_filters = array();
+        $this->_filters = [];
         $this->setCache($cache);
     }
 
@@ -150,7 +150,7 @@ class LiquidTemplate
      */
     public static function tokenize($source)
     {
-        return (!$source) ? array() : preg_split(LIQUID_TOKENIZATION_REGEXP, $source, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+        return (!$source) ? [] : preg_split(LIQUID_TOKENIZATION_REGEXP, $source, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
     }
 
 
@@ -186,30 +186,11 @@ class LiquidTemplate
      * Renders the current template
      *
      * @param array $assigns An array of values for the template
-     * @param array $filters Additional filters for the template
-     * @param array $registers Additional registers for the template
      * @return string
      */
-    public function render(array $assigns = array(), $filters = null, $registers = null)
+    public function render(array $assigns = [])
     {
-        $context = new LiquidContext($assigns, $registers);
-
-        if (!is_null($filters))
-        {
-            if (is_array($filters))
-            {
-                array_merge($this->_filters, $filters);
-            }
-            else
-            {
-                $this->_filters[] = $filters;
-            }
-        }
-
-        foreach($this->_filters as $filter)
-        {
-            $context->addFilters($filter);
-        }
+        $context = new LiquidContext($assigns);
 
         return $this->_root->render($context);
     }

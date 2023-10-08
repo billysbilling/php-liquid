@@ -81,7 +81,7 @@ class SimpleReflection {
      *    @access public
      */
     function getInterfaces() {
-        return array();
+        return [];
     }
 
     /**
@@ -112,7 +112,7 @@ class SimpleReflection {
     function isInterface() {
         return false;
     }
-        
+
     /**
      *    Scans for final methods, but as it's PHP 4 there
      *    aren't any.
