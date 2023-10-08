@@ -21,7 +21,7 @@ class LiquidDecisionBlock extends LiquidBlock
     /**
      * Returns a string value of an array for comparisons
      */
-    private function stringValue(mixed $value): string
+    private function stringValue(mixed $value): string|null
     {
         // objects should have a to_string a value to compare to
         if (is_object($value)) {
